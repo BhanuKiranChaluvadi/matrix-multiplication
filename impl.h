@@ -48,60 +48,27 @@ void sse_multiply(double *src1, double *src2, double *dst, int src1_w, int src1_
 			{
 				__m128d I0 = _mm_loadu_pd((src1 + (x + 0) * src1_w + k));
 				__m128d I1 = _mm_loadu_pd((src1 + (x + 1) * src1_w + k));
-				// std::cout << "IO" << std::endl;
-				// print128d(I0);
-				// std::cout << "I1" << std::endl;
-				// print128d(I1);
 
 				__m128d I2 = _mm_set_pd(src2[(k + 1) * src2_w + y], src2[k * src2_w + y]);
 				__m128d I3 = _mm_set_pd(src2[(k + 1) * src2_w + (y + 1)],
 																src2[(k + 0) * src2_w + (y + 1)]);
-				// std::cout << "I2" << std::endl;
-				// print128d(I2);
-				// std::cout << "I3" << std::endl;
-				// print128d(I3);
 
 				__m128d T0 = _mm_mul_pd(I0, I2);
 				__m128d T1 = _mm_mul_pd(I0, I3);
 
-				// std::cout << "T0" << std::endl;
-				// print128d(T0);
-				// std::cout << "T1" << std::endl;
-				// print128d(T1);
-
 				__m128d T2 = _mm_mul_pd(I1, I2);
 				__m128d T3 = _mm_mul_pd(I1, I3);
-
-				// std::cout << "T2" << std::endl;
-				// print128d(T2);
-				// std::cout << "T3" << std::endl;
-				// print128d(T3);
 
 				__m128d T4 = _mm_unpacklo_pd(T0, T1);
 				__m128d T5 = _mm_unpackhi_pd(T0, T1);
 
-				// std::cout << "T4" << std::endl;
-				// print128d(T4);
-				// std::cout << "T5" << std::endl;
-				// print128d(T5);
-
 				T4 = _mm_add_pd(T4, T5);
-				// std::cout << "local count" << std::endl;
-				// print128d(T4);
-
 				des0 = _mm_add_pd(T4, des0);
-
-				// std::cout << "global count" << std::endl;
-				// print128d(des0); // Final
 
 				T4 = _mm_unpacklo_pd(T2, T3);
 				T5 = _mm_unpackhi_pd(T2, T3);
-				// print128d(T4);
-				// print128d(T5);
-
 				T4 = _mm_add_pd(T4, T5);
 				des1 = _mm_add_pd(T4, des1);
-				// print128d(des1); // Final
 			}
 
 			_mm_store_pd((dst + ((x + 0) * src2_w) + y), des0);
