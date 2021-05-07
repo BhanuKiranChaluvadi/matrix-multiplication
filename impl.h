@@ -18,6 +18,7 @@ void print_array(double *src, int size)
 		std::cout << *(src + i) << std::endl;
 	}
 }
+
 void naive_multiply(double *src1, double *src2, double *dst, int src1_w, int src1_h, int src2_w, int src2_h)
 {
 	memset(dst, 0, sizeof(int) * src1_h * src2_w);

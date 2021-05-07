@@ -1,7 +1,7 @@
 CFLAGS = -mavx2 --std=c++98 -O0 -Wall -m32
 
 VERIFY ?= 0
-COMMON_SRCS := MatrixMN.cpp main.cpp
+COMMON_SRCS := main.cpp
 EXECUTABLE := sse
 
 sse : $(COMMON_SRCS)

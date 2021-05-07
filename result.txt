@@ -1,0 +1,6 @@
+size 2
+naive  0.084500
+sse  0.049600
+size 4
+naive  0.142900
+sse  0.086900
